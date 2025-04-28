@@ -25,4 +25,4 @@ An empty `00-empty.conf` file is present by default.
 
 Docker tags
 -----------
-* `latest`, `1.0`
+* `latest`, `1.27.1`
