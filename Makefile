@@ -26,6 +26,7 @@ docker_build:
 	  --build-arg BUILD_DATE=`date -u '+%FT%TZ'` \
 	  --build-arg VCS_REF=$(GIT_COMMIT) \
 	  --build-arg VCS_URL=`git config --get remote.origin.url` \
+	  -t $(DOCKER_IMAGE):latest \
 	  -t $(DOCKER_IMAGE):$(DOCKER_TAG) .
 
 docker_push:

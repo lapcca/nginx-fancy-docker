@@ -14,6 +14,7 @@ CMD ["nginx", "-g", "daemon off;"]
 COPY --from=0 /etc/nginx/modules/ngx_http_fancyindex_module.so /etc/nginx/modules/ngx_http_fancyindex_module.so
 COPY fancyindex.conf /etc/nginx/load.d/fancyindex.conf
 RUN sed -ri '/index  index\.html/a         fancyindex on;\n        fancyindex_localtime on;\n        fancyindex_default_sort date_desc;\n' /etc/nginx/conf.d/default.conf
+RUN sed -ri 's/root\s+\/usr\/share\/nginx\/html/root   \/data/' /etc/nginx/conf.d/default.conf
 ARG VERSION
 ARG BUILD_DATE
 ARG VCS_REF
