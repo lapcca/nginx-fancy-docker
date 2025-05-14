@@ -16,6 +16,7 @@ COPY fancyindex.conf /etc/nginx/load.d/fancyindex.conf
 RUN sed -ri '/index  index\.html/ a         fancyindex on;\n        fancyindex_localtime on;\n        fancyindex_default_sort date_desc;\n        fancyindex_header      "/theme/header.html";\n        fancyindex_footer      "/theme/footer.html";' /etc/nginx/conf.d/default.conf
 RUN sed -i '/location \/ {/,/}/ s|root   /usr/share/nginx/html;|root   /data;|' /etc/nginx/conf.d/default.conf
 RUN awk '/server {/,/}/ {print; if (/}/) {print "    location /theme/ {\n        alias /etc/nginx/theme/;\n    }"} next} 1' /etc/nginx/conf.d/default.conf > temp && mv temp /etc/nginx/conf.d/default.conf
+RUN sed -ri '1i include /etc/nginx/load.d/*.conf;' /etc/nginx/nginx.conf
 RUN mkdir -p /etc/nginx/theme
 COPY theme /etc/nginx/theme
 ARG VERSION
